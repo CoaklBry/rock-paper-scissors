@@ -35,10 +35,13 @@ function game() {
                 )
         ) {
             console.log("You win this round!")
+            return 1;
         } else if (plChoice === comChoice) {
             console.log("It's a draw :|");
+            return 0;
         }  else {
             console.log("The computer wins this round...")
+            return 2;
         }     
         return;
     }
