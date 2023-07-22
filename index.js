@@ -3,16 +3,18 @@
 function game() {
 
     //Gets input from player for their choice in rock-paper-scissors.
+    //Returns player selection as a string.
     function getPlayerSelection() {
 
         let selection = null;
         while (selection !== 'scissors' && selection !== 'paper' && selection !== 'rock') {
-            selection = (prompt("Please type a selection...\nRock\n2Paper\nScissors").toLowerCase());
+            selection = (prompt("Please type a selection...\nRock\nPaper\nScissors").toLowerCase());
         }
         return selection;
     }
 
     //Generates a random number betweeen .01 and 1 and assigns a selection based on the outcome.
+    //Returns computer selection as a string.
     function getComputerSelection() {
         let selection = 0;
 
@@ -29,7 +31,8 @@ function game() {
     }
 
     //Determines if the player won the current round or not.
-    function determineRoundWinner(plChoice, comChoice, counter) {
+    //Returns string stating who won or if the game was a draw.
+    function determineRoundWinner(plChoice, comChoice) {
         if (
                 (
                 plChoice === 'scissors' && comChoice === 'paper' ||
@@ -37,14 +40,14 @@ function game() {
                 plChoice === 'paper' && comChoice === 'rock'
                 )
         ) {
-            console.log("You win this round!")
-            return 1;
+            alert("You win this round!")
+            return "player";
         } else if (plChoice === comChoice) {
-            console.log("It's a draw :|");
-            return 0;
+            alert("It's a draw :|");
+            return "draw";
         }  else {
-            console.log("The computer wins this round...")
-            return 2;
+            alert("The computer wins this round...")
+            return "computer";
         }     
         return;
     }
@@ -53,9 +56,9 @@ function game() {
     function concludeGame(plWins, comWins) {
         
         if (plWins > comWins) {
-            console.log("Congrats, you win!");
+            alert("Congrats, you win!");
         } else {
-            console.log("Sorry, you lose!");
+            alert("Sorry, you lose!");
         }
     }
 
@@ -64,7 +67,7 @@ function game() {
 
         let continueGame = null;
         while (continueGame !== true) {
-            continueGame = prompt("Would you like to play again?/nY/nN").toLowerCase();
+            continueGame = prompt("Would you like to play again?\nY\nN").toLowerCase();
 
             if (continueGame === "y") {
                 return true;
@@ -72,9 +75,29 @@ function game() {
                 return false;
             }
         }
-        return;
+        return false;
     }
 
-    console.log(newGameCheck());
+    alert("Welcome to Rock-Paper-Scissors!");
+    alert("Play 5 rounds against the computer and see if you can win!");
+
+    let plWins = 0, comWins = 0;
+    let plSelection = "", comSelection = "", roundWinner = "";
+    do {
+        plSelection = getPlayerSelection();
+        comSelection = getComputerSelection();
+        roundWinner = determineRoundWinner(plSelection, comSelection);
+
+        if (roundWinner === "player") {
+            plWins++;
+        } else if (roundWinner === "computer") {
+            comWins++;
+        }
+        alert("Current score\nPlayer: " + plWins + "\nComputer: " + comWins);
+    } while (plWins < 5 && comWins < 5);
+    concludeGame(plWins, comWins);
+
+    if (newGameCheck()) {game()};
+    alert("Thanks for playing!");
     return;
 }
