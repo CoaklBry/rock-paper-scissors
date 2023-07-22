@@ -2,6 +2,7 @@
 
 function game() {
 
+    //Gets input from player for their choice in rock-paper-scissors.
     function getPlayerSelection() {
 
         let selection = null;
@@ -11,6 +12,7 @@ function game() {
         return selection;
     }
 
+    //Generates a random number betweeen .01 and 1 and assigns a selection based on the outcome.
     function getComputerSelection() {
         let selection = 0;
 
@@ -26,6 +28,7 @@ function game() {
         return;
     }
 
+    //Determines if the player won the current round or not.
     function determineRoundWinner(plChoice, comChoice, counter) {
         if (
                 (
@@ -46,17 +49,32 @@ function game() {
         return;
     }
 
+    //Checks to see if a win condition is met and ends the game if so. 
     function concludeGame(plWins, comWins) {
+        
         if (plWins > comWins) {
             console.log("Congrats, you win!");
         } else {
             console.log("Sorry, you lose!");
         }
+    }
+
+    //Takes user input to see if they'd like to play another game.
+    function newGameCheck() {
+
+        let continueGame = null;
+        while (continueGame !== true) {
+            continueGame = prompt("Would you like to play again?/nY/nN").toLowerCase();
+
+            if (continueGame === "y") {
+                return true;
+            } else if (continueGame === "n") {
+                return false;
+            }
+        }
         return;
     }
 
-    concludeGame(1, 5);
-    concludeGame(5, 2);
-    concludeGame(4, 5);
+    console.log(newGameCheck());
     return;
 }
