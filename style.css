@@ -5,11 +5,24 @@ body {
     color: rgb(205, 205, 205);
 }
 
+.gameDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .output {
     background-color: inherit;
     color: inherit;
     width: 40vw;
     height: auto;
+    border: 3px;
+    border-color:rgb(205, 205, 205)
+}
+
+.buttonDiv {
+    display: flex;
+    justify-content: center;
 }
 
 .introduction {
