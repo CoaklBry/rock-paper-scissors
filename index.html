@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <script src="index.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body onload="game()">
-    
+<body defer="game()">
+    <div class="gameDiv">
+        <div class="output">
+            <p class="introduction">
+                Hello! Let's play rock-paper-scissors!
+                First to win five rounds is the winner!
+            </p>
+        </div>
+        <div class="buttonDiv">
+            <button id="playButton"></button>
+            <button id="quitButton"></button>
+        </div>
+    </div>
 </body>
 </html>
