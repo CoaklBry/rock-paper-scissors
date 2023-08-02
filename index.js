@@ -2,6 +2,17 @@
 
 function game() {
 
+    const playButton = document.querySelector('#playButton');
+    const quitButton = document.querySelector('#quitButton');
+
+
+    playButton.addEventListener('click', () => alert("Hello world"));
+
+    function playGame() {
+        const outputText = document.querySelector('.outputText');
+        outputText.textContent = "Beginning a game";
+        console.log("Beginning a game");
+    }
     //Gets input from player for their choice in rock-paper-scissors.
     //Returns player selection as a string.
     function getPlayerSelection() {
