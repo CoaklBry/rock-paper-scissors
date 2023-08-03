@@ -5,6 +5,14 @@ body {
     color: rgb(205, 205, 205);
 }
 
+button {
+    border-radius: 50%;
+    text-align: center;
+    font-size: 25px;
+    padding: 10px;
+    margin: 5px;
+}
+
 .gameDiv {
     display: flex;
     flex-direction: column;

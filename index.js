@@ -1,27 +1,32 @@
 
+const playButton = document.querySelector('#playButton');
+playButton.addEventListener('click', playGame);
+
+function playGame() {
+    game();
+}
 
 function game() {
 
-    const playButton = document.querySelector('#playButton');
-    const quitButton = document.querySelector('#quitButton');
+    const outputText = document.querySelector('.outputText');
+    playButton.removeEventListener;
+    document.getElementById('playButton').style.display = 'none';
+    document.getElementById("rockButton").style.display = 'initial';
+    document.getElementById("paperButton").style.display = 'initial';
+    document.getElementById("scissorsButton").style.display = 'initial';
+    const buttons = document.querySelectorAll('button');
 
+    //Fix this first!!
+    buttons.forEach((button) =>
+        button.addEventListener('click', getPlayerSelection()
+        );
+    
 
-    playButton.addEventListener('click', () => alert("Hello world"));
-
-    function playGame() {
-        const outputText = document.querySelector('.outputText');
-        outputText.textContent = "Beginning a game";
-        console.log("Beginning a game");
-    }
     //Gets input from player for their choice in rock-paper-scissors.
     //Returns player selection as a string.
-    function getPlayerSelection() {
-
-        let selection = null;
-        while (selection !== 'scissors' && selection !== 'paper' && selection !== 'rock') {
-            selection = (prompt("Please type a selection...\nRock\nPaper\nScissors").toLowerCase());
-        }
-        return selection;
+    function getPlayerSelection(id) {
+        console.log("Current id: " + id);
+        return id;
     }
 
     //Generates a random number betweeen .01 and 1 and assigns a selection based on the outcome.
@@ -89,9 +94,7 @@ function game() {
         return false;
     }
 
-    alert("Welcome to Rock-Paper-Scissors!");
-    alert("Play 5 rounds against the computer and see if you can win!");
-
+    /*
     let plWins = 0, comWins = 0;
     let plSelection = "", comSelection = "", roundWinner = "";
     do {
@@ -111,4 +114,5 @@ function game() {
     if (newGameCheck()) {game()};
     alert("Thanks for playing!");
     return;
+    */
 }
