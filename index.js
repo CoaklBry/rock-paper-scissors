@@ -16,17 +16,40 @@ function game() {
     document.getElementById("scissorsButton").style.display = 'initial';
     const buttons = document.querySelectorAll('button');
 
-    //Fix this first!!
-    buttons.forEach((button) =>
-        button.addEventListener('click', getPlayerSelection()
-        );
+    buttons.forEach((button) => {
+        button.addEventListener('click', playRound(button.id));
+        }
+    );
+
+    let winnerFound = false;
+    let plWinCount = 0;
+    let comWinCount = 0;
+    outputText.textContent = "Choose your weapon!";
+    
+    while (winnerFound !== true) {
+        
     
 
-    //Gets input from player for their choice in rock-paper-scissors.
-    //Returns player selection as a string.
+    function playRound(id) {
+        const plSelection = getPlayerSelection(id);
+        const comSelection = getComputerSelection();
+        const roundWinner = determineRoundWinner(plSelection, comSelection);
+        if (roundWinner === 'player') {plWinCount++}
+            else if (roundWinner === 'computer') {comWinCount++};
+
+        if (roundWinner === 'draw') {outputText.textContent = "It's a draw!"}
+            else {
+            outputText.textContent = `The winner of this round is ${roundWinner}` +
+                `\nPlayer Wins: ${plWinCount  ${comWinCount}`;
+            }
+    }
+
     function getPlayerSelection(id) {
-        console.log("Current id: " + id);
-        return id;
+        if (id === 'rockButton') {
+            return 'rock';
+        } else if (id === 'scissorsButton') {
+            return 'scissors';
+        } else return 'paper';
     }
 
     //Generates a random number betweeen .01 and 1 and assigns a selection based on the outcome.
@@ -56,16 +79,12 @@ function game() {
                 plChoice === 'paper' && comChoice === 'rock'
                 )
         ) {
-            alert("You win this round!")
             return "player";
         } else if (plChoice === comChoice) {
-            alert("It's a draw :|");
             return "draw";
         }  else {
-            alert("The computer wins this round...")
             return "computer";
         }     
-        return;
     }
 
     //Checks to see if a win condition is met and ends the game if so. 
