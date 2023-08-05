@@ -33,6 +33,7 @@ function game() {
             else if (roundWinner === 'computer') {comWinCount++};
 
         updateOutputTextRoundEnd(roundWinner);
+        if (plWinCount == 5 || comWinCount == 5) {concludeGame();}
     }
 
     function updateOutputTextGameStart() {
@@ -94,13 +95,17 @@ function game() {
         }     
     }
 
-    function concludeGame(plWins, comWins) {
-        
-        if (plWins > comWins) {
-            alert("Congrats, you win!");
+    function concludeGame() {
+        document.getElementById("rockButton").style.display = 'none';
+        document.getElementById("paperButton").style.display = 'none';
+        document.getElementById("scissorsButton").style.display = 'none';
+        if (plWinCount > comWinCount) {
+            outputText.textContent = "Congrats! You win!";
         } else {
-            alert("Sorry, you lose!");
+            outputText.textContent = "Sorry! You lose...";
         }
+        winCounters.textContent = "Want to play again?";
+        playButton.style.display = "initial";
     }
 
     function newGameCheck() {
