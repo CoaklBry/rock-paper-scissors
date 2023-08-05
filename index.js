@@ -1,10 +1,6 @@
 
 const playButton = document.querySelector('#playButton');
-playButton.addEventListener('click', playGame);
-
-function playGame() {
-    game();
-}
+playButton.addEventListener('click', game);
 
 function game() {
 
@@ -14,23 +10,20 @@ function game() {
     document.getElementById("rockButton").style.display = 'initial';
     document.getElementById("paperButton").style.display = 'initial';
     document.getElementById("scissorsButton").style.display = 'initial';
-    const buttons = document.querySelectorAll('button');
+    let winnerFound = false, plWinCount = 0, comWinCount = 0;
 
-    buttons.forEach((button) => {
-        button.addEventListener('click', playRound(button.id));
+    const controlButtons = document.querySelectorAll('button');
+    controlButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation;
+            playRound(button.id, plWinCount, comWinCount);
+        });
         }
     );
 
-    let winnerFound = false;
-    let plWinCount = 0;
-    let comWinCount = 0;
     outputText.textContent = "Choose your weapon!";
-    
-    while (winnerFound !== true) {
-        
-    
 
-    function playRound(id) {
+    function playRound(id, plWinCount, comWinCount) {
         const plSelection = getPlayerSelection(id);
         const comSelection = getComputerSelection();
         const roundWinner = determineRoundWinner(plSelection, comSelection);
@@ -40,7 +33,7 @@ function game() {
         if (roundWinner === 'draw') {outputText.textContent = "It's a draw!"}
             else {
             outputText.textContent = `The winner of this round is ${roundWinner}` +
-                `\nPlayer Wins: ${plWinCount  ${comWinCount}`;
+                `\nPlayer Wins: ${plWinCount}  Computer Wins: ${comWinCount}`;
             }
     }
 
@@ -52,8 +45,6 @@ function game() {
         } else return 'paper';
     }
 
-    //Generates a random number betweeen .01 and 1 and assigns a selection based on the outcome.
-    //Returns computer selection as a string.
     function getComputerSelection() {
         let selection = 0;
 
@@ -69,8 +60,6 @@ function game() {
         return;
     }
 
-    //Determines if the player won the current round or not.
-    //Returns string stating who won or if the game was a draw.
     function determineRoundWinner(plChoice, comChoice) {
         if (
                 (
@@ -87,7 +76,6 @@ function game() {
         }     
     }
 
-    //Checks to see if a win condition is met and ends the game if so. 
     function concludeGame(plWins, comWins) {
         
         if (plWins > comWins) {
@@ -97,7 +85,6 @@ function game() {
         }
     }
 
-    //Takes user input to see if they'd like to play another game.
     function newGameCheck() {
 
         let continueGame = null;
