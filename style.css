@@ -20,6 +20,7 @@ button {
 }
 
 .output {
+    text-align: center;
     background-color: inherit;
     color: inherit;
     width: 40vw;
@@ -34,6 +35,9 @@ button {
 }
 
 .outputText {
-    text-align: center;
     font-size: 36px;
+}
+
+.winCounters {
+    font-size: 24px;
 }

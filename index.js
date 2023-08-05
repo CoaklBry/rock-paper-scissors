@@ -4,37 +4,55 @@ playButton.addEventListener('click', game);
 
 function game() {
 
-    const outputText = document.querySelector('.outputText');
+    var outputText = document.querySelector('.outputText');
+    var winCounters = document.querySelector('.winCounters');
     playButton.removeEventListener;
     document.getElementById('playButton').style.display = 'none';
     document.getElementById("rockButton").style.display = 'initial';
     document.getElementById("paperButton").style.display = 'initial';
     document.getElementById("scissorsButton").style.display = 'initial';
-    let winnerFound = false, plWinCount = 0, comWinCount = 0;
+    var plWinCount = 0, comWinCount = 0;
 
     const controlButtons = document.querySelectorAll('button');
     controlButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
             e.stopPropagation;
-            playRound(button.id, plWinCount, comWinCount);
+            playRound(button.id);
         });
         }
     );
 
-    outputText.textContent = "Choose your weapon!";
+    updateOutputTextGameStart();
 
-    function playRound(id, plWinCount, comWinCount) {
+
+    function playRound(id) {
         const plSelection = getPlayerSelection(id);
         const comSelection = getComputerSelection();
         const roundWinner = determineRoundWinner(plSelection, comSelection);
         if (roundWinner === 'player') {plWinCount++}
             else if (roundWinner === 'computer') {comWinCount++};
 
-        if (roundWinner === 'draw') {outputText.textContent = "It's a draw!"}
-            else {
-            outputText.textContent = `The winner of this round is ${roundWinner}` +
-                `\nPlayer Wins: ${plWinCount}  Computer Wins: ${comWinCount}`;
-            }
+        updateOutputTextRoundEnd(roundWinner);
+    }
+
+    function updateOutputTextGameStart() {
+        outputText.textContent = "Choose your weapon!";
+        winCounters.style.display = 'inherit';
+        winCounters.textContent = 
+            `Player: ${plWinCount}
+            Computer: ${comWinCount}`;
+    }
+
+    function updateOutputTextRoundEnd(winner) {
+
+        if (winner === 'draw') {
+            outputText.textContent = "It's a draw!"
+        } else {
+            outputText.textContent = `The winner of this round is the ${winner}!`;
+        }
+        winCounters.textContent = 
+        `Player: ${plWinCount}
+        Computer: ${comWinCount}`;
     }
 
     function getPlayerSelection(id) {
