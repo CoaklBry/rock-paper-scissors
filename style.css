@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(29, 26, 26);
+    color: rgb(205, 205, 205);
+}
+
+button {
+    border-radius: 50%;
+    text-align: center;
+    font-size: 25px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.gameDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.output {
+    text-align: center;
+    background-color: inherit;
+    color: inherit;
+    width: 40vw;
+    height: auto;
+    border: 3px;
+    border-color:rgb(205, 205, 205)
+}
+
+.buttonDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.outputText {
+    font-size: 36px;
+}
+
+.winCounters {
+    font-size: 24px;
+}

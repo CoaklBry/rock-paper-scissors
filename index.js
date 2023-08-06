@@ -1,20 +1,69 @@
 
+const playButton = document.querySelector('#playButton');
+playButton.addEventListener('click', game);
 
 function game() {
 
-    //Gets input from player for their choice in rock-paper-scissors.
-    //Returns player selection as a string.
-    function getPlayerSelection() {
+    var plWinCount = 0, comWinCount = 0;
+    var outputText = document.querySelector('.outputText');
+    var winCounters = document.querySelector('.winCounters');
+    playButton.removeEventListener;
+    document.getElementById('playButton').style.display = 'none';
+    document.getElementById("rockButton").style.display = 'initial';
+    document.getElementById("paperButton").style.display = 'initial';
+    document.getElementById("scissorsButton").style.display = 'initial';
 
-        let selection = null;
-        while (selection !== 'scissors' && selection !== 'paper' && selection !== 'rock') {
-            selection = (prompt("Please type a selection...\nRock\nPaper\nScissors").toLowerCase());
+    const controlButtons = document.querySelectorAll('button');
+    controlButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation;
+            playRound(button.id);
+        });
         }
-        return selection;
+    );
+
+    updateOutputTextGameStart();
+
+
+    function playRound(id) {
+        const plSelection = getPlayerSelection(id);
+        const comSelection = getComputerSelection();
+        const roundWinner = determineRoundWinner(plSelection, comSelection);
+        if (roundWinner === 'player') {plWinCount++}
+            else if (roundWinner === 'computer') {comWinCount++};
+
+        updateOutputTextRoundEnd(roundWinner);
+        if (plWinCount == 5 || comWinCount == 5) {concludeGame();}
     }
 
-    //Generates a random number betweeen .01 and 1 and assigns a selection based on the outcome.
-    //Returns computer selection as a string.
+    function updateOutputTextGameStart() {
+        outputText.textContent = "Choose your weapon!";
+        winCounters.style.display = 'inherit';
+        winCounters.textContent = 
+            `Player: ${plWinCount}
+            Computer: ${comWinCount}`;
+    }
+
+    function updateOutputTextRoundEnd(winner) {
+
+        if (winner === 'draw') {
+            outputText.textContent = "It's a draw!"
+        } else {
+            outputText.textContent = `The winner of this round is the ${winner}!`;
+        }
+        winCounters.textContent = 
+        `Player: ${plWinCount}
+        Computer: ${comWinCount}`;
+    }
+
+    function getPlayerSelection(id) {
+        if (id === 'rockButton') {
+            return 'rock';
+        } else if (id === 'scissorsButton') {
+            return 'scissors';
+        } else return 'paper';
+    }
+
     function getComputerSelection() {
         let selection = 0;
 
@@ -30,8 +79,6 @@ function game() {
         return;
     }
 
-    //Determines if the player won the current round or not.
-    //Returns string stating who won or if the game was a draw.
     function determineRoundWinner(plChoice, comChoice) {
         if (
                 (
@@ -40,64 +87,22 @@ function game() {
                 plChoice === 'paper' && comChoice === 'rock'
                 )
         ) {
-            alert("You win this round!")
             return "player";
         } else if (plChoice === comChoice) {
-            alert("It's a draw :|");
             return "draw";
         }  else {
-            alert("The computer wins this round...")
             return "computer";
         }     
-        return;
     }
 
-    //Checks to see if a win condition is met and ends the game if so. 
-    function concludeGame(plWins, comWins) {
-        
-        if (plWins > comWins) {
-            alert("Congrats, you win!");
+    function concludeGame() {
+        document.getElementById("rockButton").style.display = 'none';
+        document.getElementById("paperButton").style.display = 'none';
+        document.getElementById("scissorsButton").style.display = 'none';
+        if (plWinCount > comWinCount) {
+            outputText.textContent = "Congrats! You win!";
         } else {
-            alert("Sorry, you lose!");
+            outputText.textContent = "Sorry! You lose...";
         }
     }
-
-    //Takes user input to see if they'd like to play another game.
-    function newGameCheck() {
-
-        let continueGame = null;
-        while (continueGame !== true) {
-            continueGame = prompt("Would you like to play again?\nY\nN").toLowerCase();
-
-            if (continueGame === "y") {
-                return true;
-            } else if (continueGame === "n") {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    alert("Welcome to Rock-Paper-Scissors!");
-    alert("Play 5 rounds against the computer and see if you can win!");
-
-    let plWins = 0, comWins = 0;
-    let plSelection = "", comSelection = "", roundWinner = "";
-    do {
-        plSelection = getPlayerSelection();
-        comSelection = getComputerSelection();
-        roundWinner = determineRoundWinner(plSelection, comSelection);
-
-        if (roundWinner === "player") {
-            plWins++;
-        } else if (roundWinner === "computer") {
-            comWins++;
-        }
-        alert("Current score\nPlayer: " + plWins + "\nComputer: " + comWins);
-    } while (plWins < 5 && comWins < 5);
-    concludeGame(plWins, comWins);
-
-    if (newGameCheck()) {game()};
-    alert("Thanks for playing!");
-    return;
 }
