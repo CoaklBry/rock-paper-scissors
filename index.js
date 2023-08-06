@@ -4,6 +4,7 @@ playButton.addEventListener('click', game);
 
 function game() {
 
+    var plWinCount = 0, comWinCount = 0;
     var outputText = document.querySelector('.outputText');
     var winCounters = document.querySelector('.winCounters');
     playButton.removeEventListener;
@@ -11,7 +12,6 @@ function game() {
     document.getElementById("rockButton").style.display = 'initial';
     document.getElementById("paperButton").style.display = 'initial';
     document.getElementById("scissorsButton").style.display = 'initial';
-    var plWinCount = 0, comWinCount = 0;
 
     const controlButtons = document.querySelectorAll('button');
     controlButtons.forEach((button) => {
@@ -104,44 +104,5 @@ function game() {
         } else {
             outputText.textContent = "Sorry! You lose...";
         }
-        winCounters.textContent = "Want to play again?";
-        playButton.style.display = "initial";
     }
-
-    function newGameCheck() {
-
-        let continueGame = null;
-        while (continueGame !== true) {
-            continueGame = prompt("Would you like to play again?\nY\nN").toLowerCase();
-
-            if (continueGame === "y") {
-                return true;
-            } else if (continueGame === "n") {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    /*
-    let plWins = 0, comWins = 0;
-    let plSelection = "", comSelection = "", roundWinner = "";
-    do {
-        plSelection = getPlayerSelection();
-        comSelection = getComputerSelection();
-        roundWinner = determineRoundWinner(plSelection, comSelection);
-
-        if (roundWinner === "player") {
-            plWins++;
-        } else if (roundWinner === "computer") {
-            comWins++;
-        }
-        alert("Current score\nPlayer: " + plWins + "\nComputer: " + comWins);
-    } while (plWins < 5 && comWins < 5);
-    concludeGame(plWins, comWins);
-
-    if (newGameCheck()) {game()};
-    alert("Thanks for playing!");
-    return;
-    */
 }
